@@ -31,7 +31,7 @@ const PORT = process.env.PORT||3000;
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/company",companyRoute);
 app.use("/api/v1/job",jobRoute);
-app.use("api/v1/application",applicationRoute);
+app.use("/api/v1/application",applicationRoute);
 
 //"http://localhost:8000/api/v1/user"
 app.listen(PORT, () => {

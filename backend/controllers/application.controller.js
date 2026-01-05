@@ -1,5 +1,5 @@
 import { Application } from "../models/application.model.js";
-import { Job } from "../models/job.model";
+import { Job } from "../models/job.model.js";
 
 export const applyjob=async (req,res)=>{
     try{
@@ -76,32 +76,40 @@ export const getAppliedJobs=async(req,res)=>{
 }
 
 //admin will see how much user applied
-export const getApplicants=async(req,res)=>{
-    try{
-        //first find job then see how much user applied for that 
-        const jobId=req.params;
-        const job=await Job.findById(jobId).populate({
-            path:"applications",
-            options:{sort:{createdAt:-1}},
-            populate:{
-                path:'applicant'
-            }
-        });
+export const getApplicants = async (req, res) => {
+  try {
+    // get job id from params
+    const  jobId  = req.params.id;
+    console.log("Jobid",jobId);
 
-        if(!job){
-            return res.status(404).json({
-                message:"Job not found",
-                success:false
-            })
-        };
-        return res.status(200).json({
-            job,
-            success:true
-        })
-    }catch(error){
-        console.log(error);
+    const job = await Job.findById(jobId).populate({
+      path: "applications",
+      options: { sort: { createdAt: -1 } },
+      populate: {
+        path: "applicant"
+      }
+    });
+
+    if (!job) {
+      return res.status(404).json({
+        message: "Job not found",
+        success: false
+      });
     }
-}
+
+    return res.status(200).json({
+      success: true,
+      job
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Server error",
+      success: false
+    });
+  }
+};
 
 export const updateStatus=async (req,res)=>{
     try{
