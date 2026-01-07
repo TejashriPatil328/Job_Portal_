@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
 import React from 'react'
 import { Button } from '../ui/button'
 import { LogOut, User2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     const user = false;
@@ -23,8 +24,9 @@ export default function Navbar() {
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                                <Button variant="outline">Login</Button>
-                                <Button className='bg-[#6A38C2] hover:[#5b30a6'>Sign Up</Button>
+                                <Link to="/Login"><Button variant="outline">Login</Button></Link>
+                                <Link to="/Signup"><Button className='bg-[#6A38C2] hover:[#5b30a6'>Sign Up</Button></Link>
+                                
                             </div>
                         )
                             :
@@ -36,7 +38,7 @@ export default function Navbar() {
 
                                         </Avatar>
                                     </PopoverTrigger>
-                                    <PopoverContent variant="outline" className='w-80 m-2 '>
+                                    <PopoverContent variant="outline" className='w-80 m-2 border border-gray-150 p-2'>
                                         <div className='flex gap-4 space-y-2 p-2'>
                                             <Avatar className='cursor-pointer'>
                                                 <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
