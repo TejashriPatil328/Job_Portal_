@@ -8,8 +8,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { USER_API_END_POINT } from '../utils/constant'
 import { toast } from 'sonner'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '@/redux/authSlice'
+import { Loader2 } from "lucide-react";
+
 
 export default function Signup() {
+    
     const [input, setInput] = useState({
         fullname: "",
         email: "",
@@ -18,6 +23,8 @@ export default function Signup() {
         role: "",
         file: ""
     });
+   const {loading}=useSelector(store=>store.auth);
+   const dispatch=useDispatch();
     const navigate = useNavigate();
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
@@ -29,6 +36,7 @@ export default function Signup() {
         e.preventDefault();
 
         try {
+            dispatch(setLoading(true))
             const res = await axios.post(
                 `${USER_API_END_POINT}/register`,
                 {
@@ -45,14 +53,20 @@ export default function Signup() {
                     withCredentials: true,
                 }
             );
-            console.log("res.data.success", res.data.success)
-            if (res.data.success) {
 
+            if (res.data.success) {
                 navigate("/login");
                 toast.success(res.data.message);
             }
+
+
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error(
+                error.response?.data?.message || "Something went wrong"
+            );
+        }finally{
+            dispatch(setLoading(false));
         }
     }
 
@@ -139,7 +153,11 @@ export default function Signup() {
                         </div>
 
                     </div>
-                    <Button type='submit' className='w-full my-4'>Signup</Button>
+                    {
+                        loading?<Button className="w-full my-1"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</Button>
+                        :
+                        <Button type='submit' className='w-full my-1'>Signup</Button>
+                    }
                     <span className='text-sm'>Already have an account? <Link to='/login' className='text-blue-600' >Login</Link> </span>
                 </form>
             </div>

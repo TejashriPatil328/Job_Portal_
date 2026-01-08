@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 export const register = async (req,res)=>{
     try{
         const {fullname,email,phoneNumber,password,role}=req.body;
-        console.log(fullname,email,phoneNumber,password,role);
+        
         if(!fullname||!email ||!phoneNumber||!password||!role){
             return res.status(400).json({
                 message:"Something is missing",
@@ -31,7 +31,7 @@ export const register = async (req,res)=>{
             password:hashedPassword,
             role,
         })
-        return res.status(201).json({
+        return res.status(200).json({
             message:"Account created successfully.",
             success:true
         });
