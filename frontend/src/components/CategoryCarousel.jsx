@@ -7,7 +7,9 @@ const category = [
     'Backend Developer',
     'Data Science',
     'Graphic Designer',
-    'FullStack Developer'
+    'FullStack Developer',
+    'AI-ML Engineer',
+    "Game Developer"
 ]
 
 export default function CategoryCarousel() {

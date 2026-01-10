@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { USER_API_END_POINT } from '../utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '@/redux/authSlice'
+import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from "lucide-react";
 
 
@@ -44,8 +44,10 @@ export default function Login() {
             );
 
             if (res.data.success) {
+                dispatch(setUser(res.data.safeUser))
+                navigate("/");
                 toast.success(res.data.message);
-                navigate("/home");
+                
             } else {
                 toast.error(res.data.message)
             }
