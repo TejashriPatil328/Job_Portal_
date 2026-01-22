@@ -24,7 +24,7 @@ export default function Profile() {
         <div className='flex justify-between'>
           <div className='flex items-center gap-4'>
             <Avatar className="h-24 w-24">
-              <AvatarImage src="https://github.com/shadcn.png" alt="Profile picture" />
+              <AvatarImage  src={user?.profile?.profilePhoto} alt="Profile picture" />
             </Avatar>
 
             <div>
