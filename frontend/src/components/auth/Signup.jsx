@@ -87,7 +87,7 @@ export default function Signup() {
                             value={input.fullname}
                             name="fullname"
                             onChange={changeEventHandler}
-                            placeholder='Patil'
+                            placeholder='Kalpesh Patil'
                         />
                     </div>
                     <div className='my-2'>
@@ -117,7 +117,7 @@ export default function Signup() {
                             value={input.password}
                             name="password"
                             onChange={changeEventHandler}
-                            placeholder='Patil@123'
+                            placeholder='Kalpesh@123'
                         />
                     </div>
                     <div className=' flex items-center justify-between'>
